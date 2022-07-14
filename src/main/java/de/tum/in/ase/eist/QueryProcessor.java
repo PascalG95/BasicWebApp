@@ -15,13 +15,21 @@ public class QueryProcessor {
                     "writer in the English language and the world's pre-eminent dramatist.";
         } else if (query.contains("name")) {
             return "MyTeam";
-        } else if (query.contains("which of the following numbers is the largest: 17, 104")) {
-            return "104";
+        } else if (query.contains("which of the following numbers is the largest")) {
+            ArrayList<Integer> temp = toList(query);
+            int number = temp.get(0);
+
+            for (int i = 0; i < temp.size(); i++) {
+                if (temp.get(i) > number) {
+                    number = temp.get(i);
+                }
+            }
+            return "" + number;
         } else if (query.contains("plus")) {
             ArrayList<Integer> temp = toList(query);
             int returnValue = 0;
-            for (int i = 0; i < temp.size(); i++) {
-                returnValue = returnValue + temp.get(i);
+            for (Integer integer : temp) {
+                returnValue = returnValue + integer;
             }
             return "" + returnValue;
         } else {
